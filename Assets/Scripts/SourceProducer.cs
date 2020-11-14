@@ -3,11 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SourceProducer : MonoBehaviour, IPipelineComponent
+public class SourceProducer : PipelineComponent
 {
     public float Interval;
     public GameObject Resource;
-    public GameObject Next;
 
     private Vector3 spawnPosition;
 
@@ -20,15 +19,9 @@ public class SourceProducer : MonoBehaviour, IPipelineComponent
         Use(Resource);
     }
 
-    public void Use(GameObject resource)
+    public override void Use(GameObject resource)
     {
         GameObject instantiatedResource = Instantiate(resource, spawnPosition, Quaternion.identity);
-        instantiatedResource.transform.DOScale(new Vector3(0, 0, 0), 1f).From().OnComplete(() => Next.GetComponent<IPipelineComponent>().Use(instantiatedResource));
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
+        instantiatedResource.transform.DOScale(new Vector3(0, 0, 0), 1f).From().OnComplete(() => Next[0].GetComponent<PipelineComponent>().Use(instantiatedResource));
     }
 }

@@ -140,12 +140,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61bd7129dc12349479597c30f4bad930, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  StartTrasform: {fileID: 1879498825}
+  Next:
+  - {fileID: 1299280632}
   ConveyorBlocks:
   - {fileID: 1879498825}
   - {fileID: 224069346}
   - {fileID: 1360983642}
   Speed: 1
-  Next: {fileID: 0}
 --- !u!4 &224069346 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2954359878054850714, guid: 8452ec09f74a59543aaff54852f59e2c, type: 3}
@@ -259,13 +261,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1116027528}
-  m_LocalRotation: {x: 0.021557689, y: -0.8813654, z: 0.0404079, w: 0.4702101}
-  m_LocalPosition: {x: 1.95, y: 0.65, z: 1.27}
+  m_LocalRotation: {x: 0.090503424, y: -0.9094051, z: 0.28020388, w: 0.29372996}
+  m_LocalPosition: {x: 2.34, y: 1.17, z: 2.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 5.25, y: -123.84, z: 0}
+  m_LocalEulerAnglesHint: {x: 34.25, y: -144.2, z: 0}
 --- !u!1001 &1299280631
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -341,12 +343,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 1299280632}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a5a1f5fbb335ae489ee800e5449cc15, type: 3}
+  m_Script: {fileID: 11500000, guid: f6f4434fbc4fff34fa4e05260c7ea36c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Interval: 0
-  Resource: {fileID: 7957644799711226687, guid: 6b1b6ee24ae984242a364afac4ed610d, type: 3}
-  Next: {fileID: 165527601}
+  StartTrasform: {fileID: 1299280637}
+  Next:
+  - {fileID: 3404098263865335150}
+  - {fileID: 3685500530525880924}
+--- !u!4 &1299280637 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5397142136738803836, guid: c27857156b6c6be42bd751a5f9e74fc6, type: 3}
+  m_PrefabInstance: {fileID: 1299280631}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1360983642 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2954359876515905570, guid: 8452ec09f74a59543aaff54852f59e2c, type: 3}
@@ -369,9 +377,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a5a1f5fbb335ae489ee800e5449cc15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  StartTrasform: {fileID: 0}
+  Next:
+  - {fileID: 165527601}
   Interval: 0
   Resource: {fileID: 7957644799711226687, guid: 6b1b6ee24ae984242a364afac4ed610d, type: 3}
-  Next: {fileID: 165527601}
 --- !u!4 &1879498825 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2954359875997390387, guid: 8452ec09f74a59543aaff54852f59e2c, type: 3}
@@ -625,6 +635,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4552154909585979825, guid: f6f82e2b3191c774b9df9efb19c0c9f6, type: 3}
+      propertyPath: StartTrasform
+      value: 
+      objectReference: {fileID: 3404098263865335149}
+    - target: {fileID: 4552154909585979825, guid: f6f82e2b3191c774b9df9efb19c0c9f6, type: 3}
       propertyPath: ConveyorBlocks.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -650,6 +664,11 @@ Transform:
 --- !u!4 &3404098263865335149 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7318777430860291360, guid: f6f82e2b3191c774b9df9efb19c0c9f6, type: 3}
+  m_PrefabInstance: {fileID: 3404098263865335147}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3404098263865335150 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1713593973041249092, guid: f6f82e2b3191c774b9df9efb19c0c9f6, type: 3}
   m_PrefabInstance: {fileID: 3404098263865335147}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3685500530525880923
@@ -740,11 +759,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61bd7129dc12349479597c30f4bad930, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  StartTrasform: {fileID: 3685500530525880926}
+  Next: []
   ConveyorBlocks:
   - {fileID: 3685500530525880926}
   - {fileID: 3685500530525880925}
   Speed: 0
-  Next: {fileID: 0}
 --- !u!1001 &5397142136608487891
 PrefabInstance:
   m_ObjectHideFlags: 0
