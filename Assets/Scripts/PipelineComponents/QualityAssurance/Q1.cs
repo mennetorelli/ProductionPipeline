@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Assembler : PipelineComponent
+public class Q1 : QualityAssurance
 {
-    public override void Use(GameObject resource)
+    protected override bool Check(GameObject resource)
     {
         throw new System.NotImplementedException();
     }

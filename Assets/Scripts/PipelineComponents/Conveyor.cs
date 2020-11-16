@@ -11,12 +11,12 @@ public class Conveyor : PipelineComponent
     public override void Use(GameObject resource)
     {
         Sequence sequence = DOTween.Sequence();
-        foreach (Transform block in ConveyorBlocks)
+        for (int i = 1; i < ConveyorBlocks.Count; i ++)
         {
-            Collider collider = block.GetComponent<Collider>();
+            Collider collider = ConveyorBlocks[i].GetComponent<Collider>();
             Vector3 position = new Vector3(collider.bounds.center.x, collider.bounds.center.y + collider.bounds.extents.y + resource.GetComponent<Collider>().bounds.extents.y, collider.bounds.center.z);
             sequence.Append(resource.transform.DOMove(position, Speed));
         }
-        sequence.OnComplete(() => Next[0].GetComponent<PipelineComponent>().Use(resource));
+        sequence.OnComplete(() => GoToNext(resource));
     }
 }
