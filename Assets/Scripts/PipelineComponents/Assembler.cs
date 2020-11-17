@@ -3,8 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
 
-public abstract class Assembler : PipelineComponent
+public class Assembler : PipelineComponent
 {
     public int AssemblerInterval;
     public List<GameObject> InputResources;
@@ -14,7 +15,6 @@ public abstract class Assembler : PipelineComponent
     private bool isAssembling;
     private List<GameObject> resourcesToAssemble;
     private GameObject OutputResource;
-
 
     protected override void Awake()
     {
@@ -27,7 +27,7 @@ public abstract class Assembler : PipelineComponent
         Vector3 finalPosition = new Vector3(OutputStartTransform.position.x, OutputStartTransform.position.y + OutputStartTransform.GetComponent<Collider>().bounds.extents.y, OutputStartTransform.position.z);
         OutputResource = Instantiate(OutputResourcePrefab, finalPosition, OutputStartTransform.rotation);
         resourcesToAssemble = OutputResource.GetComponentsInChildren<Resource>().Select(x => x.gameObject).ToList();
-        OutputResource.AddComponent<Resource>();
+        OutputResource.AddComponent<Resource>().Type = OutputResourcePrefab.name;
     }
 
     public override void Use(GameObject resource)
@@ -52,35 +52,26 @@ public abstract class Assembler : PipelineComponent
             resource.transform.DOScale(0, 1).OnComplete(() => Destroy(resource));
         }
 
-        
-
-        if (resourcesToAssemble.Count == 0)
-        {
-            GoToNext(OutputResource);
-            StartCoroutine(Timer2());
-        }
-    }
-
-    protected abstract GameObject BuildResources(List<GameObject> resources, Vector3 startPosition);
-
-    void Update()
-    {
-        if (!isAssembling)
+        if (resourcesToAssemble.Count == 0 && !isAssembling)
         {
             isAssembling = true;
-            StartCoroutine(Timer());
+            StartCoroutine(Timer(AssemblerInterval, () => 
+            {
+                GoToNext(OutputResource);
+                StartCoroutine(Timer(0.5f, () => 
+                {
+                    CreateNewEmptyOutputResource();
+                    isAssembling = false;
+                }));
+            }));
         }
     }
 
-    IEnumerator Timer()
+    protected override void PipelineComponentDetails()
     {
-        yield return new WaitForSeconds(AssemblerInterval);
-        isAssembling = false;
-    }
-
-    IEnumerator Timer2()
-    {
-        yield return new WaitForSeconds(0.5f);
-        CreateNewEmptyOutputResource();
+        base.PipelineComponentDetails();
+        PipelineComponentProperties.Add("Input resources: ", string.Join(", ", InputResources.Select(x => x.name)));
+        PipelineComponentProperties.Add("Output resource: ", OutputResourcePrefab.name);
+        PipelineComponentProperties.Add("Assembling interval: ", AssemblerInterval);
     }
 }

@@ -30,20 +30,27 @@ public class Resource : MonoBehaviour
             color = color
         };
 
-        Properties.Add(new ResourceProperties(id, x, color));
+        Properties.Add(new ResourceProperties(Type, id, x, color));
     }
 
     public class ResourceProperties
     {
+        public string Type;
         public string ID;
         public object X;
         public Color Color;
 
-        public ResourceProperties(string ID, object X, Color Color)
+        public ResourceProperties(string Type, string ID, object X, Color Color)
         {
+            this.Type = Type;
             this.ID = ID;
             this.X = X;
             this.Color = Color;
         }
+    }
+
+    void OnMouseDown()
+    {
+        ShowDetailsManager.Instance.ResourceSelected(Type, Properties);
     }
 }

@@ -33,19 +33,21 @@ public class Buffer : PipelineComponent
         if (bufferedObjects.Count > 0 && !isBuffering)
         {
             isBuffering = true;
-            StartCoroutine(Timer());
+            StartCoroutine(Timer(BufferInterval, () => 
+            {
+                GameObject toRemove = bufferedObjects[bufferedObjects.Count - 1];
+                toRemove.transform.DOMove(new Vector3(StartPosition.x, StartPosition.y + toRemove.GetComponent<Collider>().bounds.extents.y, StartPosition.z), 0.5f).OnComplete(() => GoToNext(toRemove));
+                toRemove.GetComponent<Collider>().enabled = true;
+                toRemove.GetComponent<Rigidbody>().useGravity = true;
+                bufferedObjects.Remove(toRemove);
+                isBuffering = false;
+            }));
         }
     }
 
-    IEnumerator Timer()
-    {
-        yield return new WaitForSeconds(BufferInterval);
-        GameObject toRemove = bufferedObjects[bufferedObjects.Count - 1];
-        toRemove.transform.DOMove(new Vector3(StartPosition.x, StartPosition.y + toRemove.GetComponent<Collider>().bounds.extents.y, StartPosition.z), 0.5f).OnComplete(() => GoToNext(toRemove));
-        toRemove.GetComponent<Collider>().enabled = true;
-        toRemove.GetComponent<Rigidbody>().useGravity = true;
-        bufferedObjects.Remove(toRemove);
-        isBuffering = false;
+    protected override void PipelineComponentDetails()
+    { 
+        base.PipelineComponentDetails();
+        PipelineComponentProperties.Add("Buffer interval: ", BufferInterval);
     }
-
 }

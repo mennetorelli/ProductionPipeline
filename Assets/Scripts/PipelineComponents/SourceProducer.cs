@@ -12,18 +12,16 @@ public class SourceProducer : PipelineComponent
 
     private bool isProducing;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        Use(Resource);
-    }
-
     void Update()
     {
         if (!isProducing)
         {
             isProducing = true;
-            StartCoroutine(Timer());
+            StartCoroutine(Timer(ProductionInterval, () =>
+            {
+                Use(Resource);
+                isProducing = false;
+            }));
         }
     }
 
@@ -34,10 +32,10 @@ public class SourceProducer : PipelineComponent
         instantiatedResource.transform.DOScale(new Vector3(0, 0, 0), 1f).From().OnComplete(() => GoToNext(instantiatedResource));
     }
 
-    IEnumerator Timer()
+    protected override void PipelineComponentDetails()
     {
-        yield return new WaitForSeconds(ProductionInterval);
-        Use(Resource);
-        isProducing = false;
+        base.PipelineComponentDetails();
+        PipelineComponentProperties.Add("Produced resource: ", Resource.GetComponent<Resource>().Type);
+        PipelineComponentProperties.Add("Production interval: ", ProductionInterval);
     }
 }
