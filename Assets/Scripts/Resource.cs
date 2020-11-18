@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Resource : MonoBehaviour
+public class Resource : MonoBehaviour, ISelectable
 {
     public string Type;
     public Material Material;
@@ -49,7 +49,7 @@ public class Resource : MonoBehaviour
         }
     }
 
-    void OnMouseDown()
+    public void Selected()
     {
         ShowDetailsManager.Instance.ResourceSelected(Type, Properties);
     }

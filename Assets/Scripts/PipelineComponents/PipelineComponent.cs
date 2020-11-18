@@ -5,7 +5,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 
-public abstract class PipelineComponent : MonoBehaviour
+public abstract class PipelineComponent : MonoBehaviour, ISelectable
 {
     public List<GameObject> Next;
 
@@ -48,7 +48,7 @@ public abstract class PipelineComponent : MonoBehaviour
         call?.Invoke();
     }
 
-    protected virtual void OnMouseDown()
+    public void Selected()
     {
         ShowDetailsManager.Instance.PipelineComponentSelected(PipelineComponentProperties);
     }

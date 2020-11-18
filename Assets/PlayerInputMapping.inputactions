@@ -30,10 +30,10 @@
                     "interactions": ""
                 },
                 {
-                    "name": "Camera_Zoom",
-                    "type": "Value",
-                    "id": "78d4f76a-c638-49cb-9638-d6c9f9427aee",
-                    "expectedControlType": "Vector2",
+                    "name": "Mouse_Click",
+                    "type": "Button",
+                    "id": "a0b95fdd-b0f7-4d10-a1e7-fb150e7efa49",
+                    "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
                 }
@@ -173,12 +173,12 @@
                 },
                 {
                     "name": "",
-                    "id": "b4f4beb2-b25f-40af-af7c-57436c9a61f2",
-                    "path": "<Mouse>/scroll",
+                    "id": "0f806483-b212-423a-a970-908173d625f1",
+                    "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Camera_Zoom",
+                    "action": "Mouse_Click",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
