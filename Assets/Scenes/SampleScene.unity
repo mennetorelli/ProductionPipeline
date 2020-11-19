@@ -179,6 +179,10 @@ PrefabInstance:
       value: SourceProducer A
       objectReference: {fileID: 0}
     - target: {fileID: 7174071156178570285, guid: 21f70239110ba324fa0a977b79ac1fe9, type: 3}
+      propertyPath: Resource
+      value: 
+      objectReference: {fileID: 7957644799711226687, guid: 6b1b6ee24ae984242a364afac4ed610d, type: 3}
+    - target: {fileID: 7174071156178570285, guid: 21f70239110ba324fa0a977b79ac1fe9, type: 3}
       propertyPath: IDIntervalLow
       value: 48
       objectReference: {fileID: 0}
@@ -423,7 +427,7 @@ GameObject:
   - component: {fileID: 130999435}
   - component: {fileID: 130999436}
   m_Layer: 5
-  m_Name: PropertiesContainer
+  m_Name: ComponentDetailsContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -446,7 +450,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -20, y: -20}
+  m_SizeDelta: {x: -40, y: -40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &130999436
 MonoBehaviour:
@@ -466,7 +470,7 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 0
-  m_Spacing: 0
+  m_Spacing: 5
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 1
@@ -1300,7 +1304,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 133765707}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 10
+  m_MaxValue: 5
   m_WholeNumbers: 0
   m_Value: 1
   m_OnValueChanged:
@@ -1738,10 +1742,10 @@ RectTransform:
   m_Father: {fileID: 1883859924}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 245, y: -245}
-  m_SizeDelta: {x: -510, y: -510}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: -330, y: 185}
+  m_SizeDelta: {x: 650, y: 350}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &606741586
 MonoBehaviour:
@@ -1755,13 +1759,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51918eb2e31ccee48bc8d6eeb0b90c81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PipelineComponent: {fileID: 790185485}
-  PipelineComponentPrefab: {fileID: 988774503084724187, guid: 5afd9b77b94b3af48a0bf24641801d3e, type: 3}
-  PipelineComponentContainer: {fileID: 130999435}
-  Resource: {fileID: 1723689900}
-  ResourceComponentContainer: {fileID: 1712965053}
-  ResourceComponent: {fileID: 8580240074013909348, guid: f3d67144f849f884186f56aa2ea065ff, type: 3}
-  ResourceComponentText: {fileID: 892512158}
+  ComponentPanel: {fileID: 790185485}
+  ComponentDetailsPrefab: {fileID: 988774503084724187, guid: 5afd9b77b94b3af48a0bf24641801d3e, type: 3}
+  ComponentDetailsContainer: {fileID: 130999435}
+  ResourcePanel: {fileID: 1723689900}
+  ResourceDetailsPrefab: {fileID: 8580240074013909348, guid: f3d67144f849f884186f56aa2ea065ff, type: 3}
+  ResourceDetailsContainer: {fileID: 1712965053}
+  ResourcePanelText: {fileID: 892512158}
 --- !u!1 &642941794
 GameObject:
   m_ObjectHideFlags: 0
@@ -2090,7 +2094,7 @@ GameObject:
   - component: {fileID: 790185488}
   - component: {fileID: 790185487}
   m_Layer: 5
-  m_Name: PipelineComponent
+  m_Name: ComponentPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2193,10 +2197,10 @@ RectTransform:
   m_Father: {fileID: 1883859924}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -295, y: 370}
-  m_SizeDelta: {x: -610, y: -760}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 250, y: -60}
+  m_SizeDelta: {x: 480, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &831100771
 MonoBehaviour:
@@ -3155,7 +3159,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75c9287944bcd41448e9623f6ece7a43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RotationSpeed: 20
+  RotationSpeed: 8
+  MoveSpeed: 8
 --- !u!1 &1156386903
 GameObject:
   m_ObjectHideFlags: 0
@@ -4127,6 +4132,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 401931892}
     m_Modifications:
     - target: {fileID: 71635036275428682, guid: f736b61e767f276408bef3e701948bb8, type: 3}
+      propertyPath: OutputResource
+      value: 
+      objectReference: {fileID: 1931472311769381868, guid: dd8fd2397879f554cae09ac1363f2bdc, type: 3}
+    - target: {fileID: 71635036275428682, guid: f736b61e767f276408bef3e701948bb8, type: 3}
       propertyPath: Next.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -4350,7 +4359,7 @@ GameObject:
   - component: {fileID: 1712965053}
   - component: {fileID: 1712965054}
   m_Layer: 5
-  m_Name: PropertiesContainer
+  m_Name: ResourceDetailsContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4424,7 +4433,7 @@ GameObject:
   - component: {fileID: 1723689903}
   - component: {fileID: 1723689902}
   m_Layer: 5
-  m_Name: Resource
+  m_Name: ResourcePanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5214,6 +5223,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 401931892}
     m_Modifications:
     - target: {fileID: 71635036275428682, guid: f736b61e767f276408bef3e701948bb8, type: 3}
+      propertyPath: OutputResource
+      value: 
+      objectReference: {fileID: 978683315744270287, guid: 28cd9c6c75203a949b6d5de8e1b7b179, type: 3}
+    - target: {fileID: 71635036275428682, guid: f736b61e767f276408bef3e701948bb8, type: 3}
       propertyPath: Next.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -5807,11 +5820,19 @@ PrefabInstance:
     m_TransformParent: {fileID: 401931892}
     m_Modifications:
     - target: {fileID: 71635036275428682, guid: f736b61e767f276408bef3e701948bb8, type: 3}
+      propertyPath: OutputResource
+      value: 
+      objectReference: {fileID: 8612886479367844550, guid: 4b03aa5c0acf8cb419892e31105349e2, type: 3}
+    - target: {fileID: 71635036275428682, guid: f736b61e767f276408bef3e701948bb8, type: 3}
       propertyPath: Next.Array.size
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 71635036275428682, guid: f736b61e767f276408bef3e701948bb8, type: 3}
       propertyPath: AssemblerInterval
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 71635036275428682, guid: f736b61e767f276408bef3e701948bb8, type: 3}
+      propertyPath: AssemblingInterval
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 71635036275428682, guid: f736b61e767f276408bef3e701948bb8, type: 3}
@@ -6703,6 +6724,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SourceProducer B
       objectReference: {fileID: 0}
+    - target: {fileID: 7174071156178570285, guid: 21f70239110ba324fa0a977b79ac1fe9, type: 3}
+      propertyPath: Resource
+      value: 
+      objectReference: {fileID: 7957644799711226687, guid: 6b1b6ee24ae984242a364afac4ed610d, type: 3}
     - target: {fileID: 7174071156178570285, guid: 21f70239110ba324fa0a977b79ac1fe9, type: 3}
       propertyPath: HighRange
       value: 100

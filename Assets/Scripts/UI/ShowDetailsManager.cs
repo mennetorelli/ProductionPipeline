@@ -6,15 +6,18 @@ using static Resource;
 
 public class ShowDetailsManager : MonoBehaviour
 {
-    public GameObject PipelineComponent;
-    public GameObject PipelineComponentPrefab;
-    public Transform PipelineComponentContainer;
-    public GameObject Resource;
-    public Transform ResourceComponentContainer;
-    public GameObject ResourceComponent;
-    public TextMeshProUGUI ResourceComponentText;
+    [Header("Component panel properties")]
+    public GameObject ComponentPanel;
+    public GameObject ComponentDetailsPrefab;
+    public Transform ComponentDetailsContainer;
 
-    private string resourceComponentBaseText;
+    [Header("Resource panel properties")]
+    public GameObject ResourcePanel;
+    public GameObject ResourceDetailsPrefab;
+    public Transform ResourceDetailsContainer;
+    public TextMeshProUGUI ResourcePanelText;
+
+    private string _resourcePanelBaseText;
 
     public static ShowDetailsManager Instance
     {
@@ -32,41 +35,38 @@ public class ShowDetailsManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-    }
 
-    void Start()
-    {
-        resourceComponentBaseText = ResourceComponentText.text;
+        _resourcePanelBaseText = ResourcePanelText.text;
     }
 
     public void PipelineComponentSelected(Dictionary<string, object> details)
     {
-        for (int i = 0; i < PipelineComponentContainer.childCount; i++)
+        for (int i = 0; i < ComponentDetailsContainer.childCount; i++)
         {
-            Destroy(PipelineComponentContainer.GetChild(i).gameObject);
+            Destroy(ComponentDetailsContainer.GetChild(i).gameObject);
         }
 
-        PipelineComponent.SetActive(true);
-        foreach (var detail in details)
+        ComponentPanel.SetActive(true);
+        foreach (var item in details)
         {
-            GameObject component = Instantiate(PipelineComponentPrefab, PipelineComponentContainer.transform);
-            component.GetComponent<PipelineComponentFiller>().Fill(detail.Key, detail.Value);
+            GameObject component = Instantiate(ComponentDetailsPrefab, ComponentDetailsContainer.transform);
+            component.GetComponent<ComponentDetailsFiller>().Fill(item.Key, item.Value);
         }
     }
 
     public void ResourceSelected(GameObject resource)
     {
-        ResourceComponentText.text = resourceComponentBaseText + resource.name;
-        for (int i = 1; i < ResourceComponentContainer.childCount; i++)
+        ResourcePanelText.text = _resourcePanelBaseText + resource.name;
+        for (int i = 1; i < ResourceDetailsContainer.childCount; i++)
         {
-            Destroy(ResourceComponentContainer.GetChild(i).gameObject);
+            Destroy(ResourceDetailsContainer.GetChild(i).gameObject);
         }
 
-        Resource.SetActive(true);
+        ResourcePanel.SetActive(true);
         foreach (ResourceProperties prop in resource.GetComponent<Resource>().Properties)
         {
-            GameObject res = Instantiate(ResourceComponent, ResourceComponentContainer.transform);
-            res.GetComponent<ResourceComponentFiller>().Fill(prop);
+            GameObject res = Instantiate(ResourceDetailsPrefab, ResourceDetailsContainer.transform);
+            res.GetComponent<ResourceDetailsFiller>().Fill(prop);
         }
     }
 

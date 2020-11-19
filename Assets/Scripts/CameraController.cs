@@ -7,10 +7,11 @@ public class CameraController : MonoBehaviour
 {
     [Header("Configurable Properties")]
     [Tooltip("How fast the camera rotates")]
-    public float RotationSpeed;
+    public float RotationSpeed = 8;
+    [Tooltip("How fast the camera moves around")]
+    public float MoveSpeed = 8;
 
     //Movement variables
-    private const float InternalMoveTargetSpeed = 8;
     private const float InternalMoveSpeed = 4;
     private Vector3 _moveTarget;
     private Vector3 _moveDirection;
@@ -20,6 +21,8 @@ public class CameraController : MonoBehaviour
     private const float InternalRotationSpeed = 4;
     private Quaternion _rotationTarget;
     private Vector2 _mouseDelta;
+
+    private float _timeScale { get => Time.timeScale != 0 ? Time.timeScale : 1; }
 
     void Start()
     {
@@ -31,21 +34,20 @@ public class CameraController : MonoBehaviour
     private void FixedUpdate()
     {
         //Sets the move target position based on the move direction. Must be done here as there's no logic for the input system to calculate holding down an input
-        _moveTarget += (transform.forward * _moveDirection.z + transform.right * _moveDirection.x) * Time.fixedDeltaTime * InternalMoveTargetSpeed;
+        _moveTarget += (transform.forward * _moveDirection.z + transform.right * _moveDirection.x) * Time.fixedDeltaTime / _timeScale * MoveSpeed;
     }
 
     private void LateUpdate()
     {
         //Lerp the camera rig to a new move target position
-        transform.position = Vector3.Lerp(transform.position, _moveTarget, Time.deltaTime * InternalMoveSpeed);
+        transform.position = Vector3.Lerp(transform.position, _moveTarget, Time.deltaTime / _timeScale * InternalMoveSpeed);
 
         //Set the target rotation based on the mouse delta position and our rotation speed
-        _rotationTarget *= Quaternion.Euler(- _mouseDelta.y * Time.deltaTime * RotationSpeed, _mouseDelta.x * Time.deltaTime * RotationSpeed, 0);
-        //_rotationTarget *= Quaternion.AngleAxis(_mouseDelta.y * Time.deltaTime * RotationSpeed, transform.InverseTransformVector(Vector3.left));
-        //_rotationTarget *= Quaternion.AngleAxis(_mouseDelta.x * Time.deltaTime * RotationSpeed, transform.InverseTransformVector(Vector3.up));
+        _rotationTarget *= Quaternion.Euler(-_mouseDelta.y * Time.deltaTime / _timeScale * RotationSpeed, _mouseDelta.x * Time.deltaTime / _timeScale * RotationSpeed, 0);
+        _rotationTarget = Quaternion.Euler(_rotationTarget.eulerAngles.x, _rotationTarget.eulerAngles.y, 0);
 
         //Slerp the camera rig's rotation based on the new target
-        transform.rotation = Quaternion.Slerp(transform.rotation, _rotationTarget, Time.deltaTime * InternalRotationSpeed);
+        transform.rotation = Quaternion.Slerp(transform.rotation, _rotationTarget, Time.deltaTime / _timeScale * InternalRotationSpeed);
     }
 
     /// <summary>

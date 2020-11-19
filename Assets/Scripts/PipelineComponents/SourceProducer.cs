@@ -10,7 +10,7 @@ public class SourceProducer : PipelineComponent
 {
     [Header("Component-specific mandatory parameters")]
     [Tooltip("The interval of time required to produce a resource")]
-    public float ProductionInterval;
+    public float ProductionInterval = 5;
     [Tooltip("The resource to be produced")]
     public GameObject Resource;
     [Tooltip("The lenght of the alphanumeric ID assigned to the resource")]

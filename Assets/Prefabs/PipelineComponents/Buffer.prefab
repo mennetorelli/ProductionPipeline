@@ -196,8 +196,8 @@ MonoBehaviour:
   - {fileID: 0}
   StartTrasform: {fileID: 0}
   StartPosition: {x: 0, y: 0, z: 0}
-  BufferInterval: 3
-  BufferStartTransform: {fileID: 1115034476923048314}
+  BufferInterval: 10
+  BufferedResourcesTransform: {fileID: 1115034476923048314}
   FeedbackTimer: {fileID: 5023017153094477472}
 --- !u!65 &8973410170945107829
 BoxCollider:
@@ -225,7 +225,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2699756995641904206, guid: 904117adc7cda414b83bcb5c0bc57d71, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4975293653039924422, guid: 904117adc7cda414b83bcb5c0bc57d71, type: 3}
       propertyPath: m_Pivot.x

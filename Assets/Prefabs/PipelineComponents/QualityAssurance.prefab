@@ -197,6 +197,7 @@ MonoBehaviour:
   StartPosition: {x: 0, y: 0, z: 0}
   FeedbackOk: {fileID: 1303365613578032989}
   FeedbackKo: {fileID: 6365475522811531013}
+  Treshold: 100
 --- !u!1 &6365475522811531013
 GameObject:
   m_ObjectHideFlags: 0

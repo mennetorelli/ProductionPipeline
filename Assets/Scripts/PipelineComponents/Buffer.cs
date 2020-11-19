@@ -7,11 +7,11 @@ public class Buffer : PipelineComponent
 {
     [Header("Component-specific mandatory parameters")]
     [Tooltip("The interval of time required before a buffered resource is sent back into the pipeline")]
-    public int BufferInterval;
+    public int BufferInterval = 10;
 
     [Header("Visual Elements")]
     [Tooltip("The transform where the resource is buffered")]
-    public Transform BufferStartTransform;
+    public Transform BufferedResourcesTransform;
     [Tooltip("Reference to the timer that is shown on top of the Buffer")]
     public GameObject FeedbackTimer;
 
@@ -23,7 +23,7 @@ public class Buffer : PipelineComponent
     {
         base.Awake();
 
-        _currentTopOfBufferPosition = new Vector3(BufferStartTransform.position.x, BufferStartTransform.position.y + BufferStartTransform.GetComponent<Collider>().bounds.extents.y, BufferStartTransform.position.z);
+        _currentTopOfBufferPosition = new Vector3(BufferedResourcesTransform.position.x, BufferedResourcesTransform.position.y + BufferedResourcesTransform.GetComponent<Collider>().bounds.extents.y, BufferedResourcesTransform.position.z);
     }
 
     public override void Use(GameObject resource)

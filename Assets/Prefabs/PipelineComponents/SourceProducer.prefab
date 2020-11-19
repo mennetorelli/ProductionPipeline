@@ -114,9 +114,11 @@ MonoBehaviour:
   StartTrasform: {fileID: 0}
   StartPosition: {x: 0, y: 0, z: 0}
   ProductionInterval: 3
-  Resource: {fileID: 7957644799711226687, guid: 6b1b6ee24ae984242a364afac4ed610d, type: 3}
-  LowRange: 0
-  HighRange: 0
+  Resource: {fileID: 0}
+  IDLength: 6
+  NumericValueLow: 0
+  NumericValueHigh: 0
+  CharValuesSet: 
   FeedbackTimer: {fileID: 3915884931377469766}
 --- !u!1001 &1382449187099219208
 PrefabInstance:

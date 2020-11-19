@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine;
 using static Resource;
 
-public class ResourceComponentFiller : MonoBehaviour
+public class ResourceDetailsFiller : MonoBehaviour
 {
     public TextMeshProUGUI Type;
     public TextMeshProUGUI ID;

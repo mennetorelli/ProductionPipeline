@@ -208,10 +208,10 @@ MonoBehaviour:
   Next: []
   StartTrasform: {fileID: 0}
   StartPosition: {x: 0, y: 0, z: 0}
-  AssemblerInterval: 5
+  AssemblingInterval: 5
   InputResources: []
-  OutputResourcePrefab: {fileID: 0}
-  OutputStartTransform: {fileID: 313915044}
+  OutputResource: {fileID: 0}
+  OutputResourceTransform: {fileID: 313915044}
   FeedbackTimer: {fileID: 5767065177456184563}
 --- !u!1001 &8466711869746413757
 PrefabInstance:

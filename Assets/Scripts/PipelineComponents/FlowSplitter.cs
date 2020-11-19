@@ -6,10 +6,13 @@ using UnityEngine;
 public class FlowSplitter : PipelineComponent
 {
     [Header("Component-specific mandatory parameters")]
-    [Tooltip("The list of weights associated to each path of the flow splitter")]
+    [Tooltip("The weights associated to each path of the flow splitter")]
     public List<float> Weighs;
 
-    public GameObject FeedbackArrow;
+    protected override void Awake()
+    {
+        base.Awake();
+    }
 
     public override void Use(GameObject resource)
     {
@@ -20,8 +23,8 @@ public class FlowSplitter : PipelineComponent
     {
         if (Next != null && Next.Count != 0)
         {
-            System.Random rnd = new System.Random();
-            double random = rnd.NextDouble();
+            // Select the index of the next pipeline component 
+            double random = new System.Random().NextDouble();
             float treshold = 0;
             int selectedIndex = 0;
             for (int i = 0; i < Weighs.Count; i ++)
@@ -33,6 +36,7 @@ public class FlowSplitter : PipelineComponent
                 treshold += Weighs[i];
             }
 
+            // Go to the selected pipeline component 
             Vector3 temp = Next[selectedIndex].GetComponent<PipelineComponent>().StartPosition;
             Vector3 targetPosition = new Vector3(temp.x, temp.y + resource.GetComponent<Collider>().bounds.extents.y, temp.z);
             resource.transform.DOMove(targetPosition, 1).OnComplete(() => Next[selectedIndex].GetComponent<PipelineComponent>().Use(resource));

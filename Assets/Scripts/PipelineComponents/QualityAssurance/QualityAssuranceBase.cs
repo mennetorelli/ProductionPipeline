@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class QualityAssurance : PipelineComponent
+public abstract class QualityAssuranceBase : PipelineComponent
 {
     [Header("Visual Elements")]
     [Tooltip("Reference to the feedback for accepted resource that is shown on top of the QualityAssurance")]

@@ -7,7 +7,7 @@ public class Conveyor : PipelineComponent
 {
     [Header("Component-specific mandatory parameters")]
     [Tooltip("The speed of the conveyor, in m/s")]
-    public float Speed;
+    public float Speed = 1;
 
     [Header("Component-specific optional parameters")]
     [Tooltip("The list of blocks of the conveyor that will be traversed in order by the resource. If left unspecified, it will be initialized as the sequence of child elements of the component")]
@@ -33,6 +33,7 @@ public class Conveyor : PipelineComponent
 
     public override void Use(GameObject resource)
     {
+        // Traverse all the conveyor blocks
         Sequence sequence = DOTween.Sequence();
         for (int i = 1; i < ConveyorBlocks.Count; i ++)
         {
