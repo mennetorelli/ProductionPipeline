@@ -5,49 +5,62 @@ using UnityEngine;
 
 public class Buffer : PipelineComponent
 {
+    [Header("Component-specific mandatory parameters")]
+    [Tooltip("The interval of time required before a buffered resource is sent back into the pipeline")]
     public int BufferInterval;
-    public Transform BufferStartTransform;
 
-    private List<GameObject> bufferedObjects = new List<GameObject>();
-    private Vector3 BufferCurrentPosition;
-    private bool isBuffering;
+    [Header("Visual Elements")]
+    [Tooltip("The transform where the resource is buffered")]
+    public Transform BufferStartTransform;
+    [Tooltip("Reference to the timer that is shown on top of the Buffer")]
+    public GameObject FeedbackTimer;
+
+    private List<GameObject> _bufferedResources = new List<GameObject>();
+    private Vector3 _currentTopOfBufferPosition;
+    private bool _isBuffering;
 
     protected override void Awake()
     {
         base.Awake();
 
-        BufferCurrentPosition = new Vector3(BufferStartTransform.position.x, BufferStartTransform.position.y + BufferStartTransform.GetComponent<Collider>().bounds.extents.y, BufferStartTransform.position.z);
+        _currentTopOfBufferPosition = new Vector3(BufferStartTransform.position.x, BufferStartTransform.position.y + BufferStartTransform.GetComponent<Collider>().bounds.extents.y, BufferStartTransform.position.z);
     }
 
     public override void Use(GameObject resource)
     {
-        resource.GetComponent<Collider>().enabled = false;
-        resource.GetComponent<Rigidbody>().useGravity = false;
-        resource.transform.DOMove(new Vector3(BufferCurrentPosition.x, BufferCurrentPosition.y + resource.GetComponent<Collider>().bounds.extents.y, BufferCurrentPosition.z), 0.5f);
-        bufferedObjects.Add(resource);
-        BufferCurrentPosition = new Vector3(BufferCurrentPosition.x, BufferCurrentPosition.y + resource.GetComponent<Collider>().bounds.extents.y, BufferCurrentPosition.z);
+        Sequence sequence = DOTween.Sequence();
+        _currentTopOfBufferPosition = new Vector3(_currentTopOfBufferPosition.x, _currentTopOfBufferPosition.y + resource.GetComponent<Collider>().bounds.extents.y * 2f, _currentTopOfBufferPosition.z);
+        sequence.Append(resource.transform.DOMoveY(_currentTopOfBufferPosition.y + resource.GetComponent<Collider>().bounds.extents.y, 0.2f));
+        sequence.Append(resource.transform.DOMove(new Vector3(_currentTopOfBufferPosition.x, _currentTopOfBufferPosition.y + resource.GetComponent<Collider>().bounds.extents.y, _currentTopOfBufferPosition.z), 0.2f));
+        _bufferedResources.Add(resource);
     }
 
     void Update()
     {
-        if (bufferedObjects.Count > 0 && !isBuffering)
+        if (_bufferedResources.Count > 0 && !_isBuffering)
         {
-            isBuffering = true;
+            _isBuffering = true;
+
+            FeedbackTimer.GetComponent<Timer>().StartTimer(BufferInterval);
             StartCoroutine(Timer(BufferInterval, () => 
             {
-                GameObject toRemove = bufferedObjects[bufferedObjects.Count - 1];
-                toRemove.transform.DOMove(new Vector3(StartPosition.x, StartPosition.y + toRemove.GetComponent<Collider>().bounds.extents.y, StartPosition.z), 0.5f).OnComplete(() => GoToNext(toRemove));
-                toRemove.GetComponent<Collider>().enabled = true;
-                toRemove.GetComponent<Rigidbody>().useGravity = true;
-                bufferedObjects.Remove(toRemove);
-                isBuffering = false;
+                GameObject toRemove = _bufferedResources[_bufferedResources.Count - 1];
+
+                Sequence sequence = DOTween.Sequence();
+                sequence.Append(toRemove.transform.DOMove(new Vector3(StartPosition.x, toRemove.transform.position.y, StartPosition.z), 0.2f));
+                sequence.Append(toRemove.transform.DOMove(new Vector3(StartPosition.x, StartPosition.y + toRemove.GetComponent<Collider>().bounds.extents.y, StartPosition.z), 0.5f));
+                sequence.OnComplete(() => GoToNext(toRemove));
+
+                _currentTopOfBufferPosition = new Vector3(_currentTopOfBufferPosition.x, _currentTopOfBufferPosition.y - toRemove.GetComponent<Collider>().bounds.extents.y * 2f, _currentTopOfBufferPosition.z);
+                _bufferedResources.Remove(toRemove);
+                _isBuffering = false;
             }));
         }
     }
 
-    protected override void PipelineComponentDetails()
+    protected override void FormatDetails()
     { 
-        base.PipelineComponentDetails();
+        base.FormatDetails();
         PipelineComponentProperties.Add("Buffer interval: ", BufferInterval);
     }
 }

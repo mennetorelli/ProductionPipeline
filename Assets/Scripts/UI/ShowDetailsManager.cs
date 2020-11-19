@@ -54,16 +54,16 @@ public class ShowDetailsManager : MonoBehaviour
         }
     }
 
-    public void ResourceSelected(string type, List<ResourceProperties> properties)
+    public void ResourceSelected(GameObject resource)
     {
-        ResourceComponentText.text = resourceComponentBaseText + type;
-        for (int i = 0; i < ResourceComponentContainer.childCount; i++)
+        ResourceComponentText.text = resourceComponentBaseText + resource.name;
+        for (int i = 1; i < ResourceComponentContainer.childCount; i++)
         {
             Destroy(ResourceComponentContainer.GetChild(i).gameObject);
         }
 
         Resource.SetActive(true);
-        foreach (ResourceProperties prop in properties)
+        foreach (ResourceProperties prop in resource.GetComponent<Resource>().Properties)
         {
             GameObject res = Instantiate(ResourceComponent, ResourceComponentContainer.transform);
             res.GetComponent<ResourceComponentFiller>().Fill(prop);

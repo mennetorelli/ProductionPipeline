@@ -1,12 +1,12 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Resource : MonoBehaviour, ISelectable
 {
-    public string Type;
-    public Material Material;
-    public List<ResourceProperties> Properties;
+    public List<ResourceProperties> Properties = new List<ResourceProperties>();
     
     [HideInInspector]
     public Vector3 ResourceScale;
@@ -14,43 +14,26 @@ public class Resource : MonoBehaviour, ISelectable
     private void Awake()
     {
         ResourceScale = transform.localScale;
-        Properties = new List<ResourceProperties>();
-    }
-
-    public void InitializeResourceProperties(int low, int high) 
-    {
-        string id = "qwerty";
-
-        System.Random rnd = new System.Random();
-        object x = rnd.Next(low, high);
-
-        Color color = new Color(rnd.Next(0, 255), rnd.Next(0, 255), rnd.Next(0, 255));
-        transform.GetComponent<MeshRenderer>().material =  new Material(Material)
-        {
-            color = color
-        };
-
-        Properties.Add(new ResourceProperties(Type, id, x, color));
     }
 
     public class ResourceProperties
     {
         public string Type;
         public string ID;
-        public object X;
+        public KeyValuePair<Type, string> Value;
         public Color Color;
 
-        public ResourceProperties(string Type, string ID, object X, Color Color)
+        public ResourceProperties(string Type, string ID, KeyValuePair<Type, string> Value, Color Color)
         {
             this.Type = Type;
             this.ID = ID;
-            this.X = X;
+            this.Value = Value;
             this.Color = Color;
         }
     }
 
     public void Selected()
     {
-        ShowDetailsManager.Instance.ResourceSelected(Type, Properties);
+        ShowDetailsManager.Instance.ResourceSelected(gameObject);
     }
 }

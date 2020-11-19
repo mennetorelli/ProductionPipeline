@@ -9,9 +9,9 @@ public class MouseInputController : MonoBehaviour
     {
         ShowDetailsManager.Instance.DeactivatePanels();
         Physics.Raycast(Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue()), out RaycastHit hit);
-        if (hit.collider != null && hit.collider.gameObject.GetComponent<ISelectable>() != null)
+        if (hit.collider != null && hit.collider.gameObject.GetComponentInParent<ISelectable>() != null)
         {
-            hit.collider.gameObject.GetComponent<ISelectable>().Selected();
+            hit.collider.gameObject.GetComponentInParent<ISelectable>().Selected();
         }
     }
 }

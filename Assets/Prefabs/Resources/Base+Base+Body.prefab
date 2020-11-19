@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 9143279608317227228}
   - component: {fileID: 1364038450080374699}
   - component: {fileID: 6227363808372400627}
+  - component: {fileID: 8976302011969828501}
   m_Layer: 0
-  m_Name: BaseBaseBody
+  m_Name: Base+Base+Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -63,6 +64,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.2, y: 0.15, z: 0.2}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8976302011969828501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 978683315744270287}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b35d72e0e647704186644bbba859c8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ResourceScale: {x: 0, y: 0, z: 0}
 --- !u!1 &1312140486229182648
 GameObject:
   m_ObjectHideFlags: 0
@@ -74,10 +88,9 @@ GameObject:
   - component: {fileID: 7410507787949398317}
   - component: {fileID: 3214985110072139270}
   - component: {fileID: 6588642981687305690}
-  - component: {fileID: 4636586673180919831}
   m_Layer: 0
   m_Name: Body
-  m_TagString: Untagged
+  m_TagString: EmptyResource
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -145,21 +158,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &4636586673180919831
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1312140486229182648}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b35d72e0e647704186644bbba859c8a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Type: Body
-  Material: {fileID: 0}
-  ResourceScale: {x: 0, y: 0, z: 0}
 --- !u!1 &3341028128969348860
 GameObject:
   m_ObjectHideFlags: 0
@@ -250,10 +248,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4677163918913568593}
-  - component: {fileID: 2233701307511755937}
   m_Layer: 0
-  m_Name: BaseBase
-  m_TagString: Untagged
+  m_Name: Base+Base
+  m_TagString: EmptyResource
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -274,21 +271,6 @@ Transform:
   m_Father: {fileID: 9143279608317227228}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2233701307511755937
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5383038281532791846}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b35d72e0e647704186644bbba859c8a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Type: BaseBase
-  Material: {fileID: 0}
-  ResourceScale: {x: 0, y: 0, z: 0}
 --- !u!1 &8178844522297256707
 GameObject:
   m_ObjectHideFlags: 0
