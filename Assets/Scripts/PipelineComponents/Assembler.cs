@@ -32,7 +32,7 @@ public class Assembler : PipelineComponent
     }
 
     /// <summary>
-    /// Creates a new empty output resource in OutputStartTransform's position
+    /// Creates a new empty output resource in the position specified by OutputStartTransform
     /// </summary>
     void CreateNewEmptyOutputResource()
     {
@@ -44,17 +44,20 @@ public class Assembler : PipelineComponent
 
     public override void Use(GameObject resource)
     {
-        // Accepts the resource arriving to the assembler if it's correct, else discard the resource
+        // If the incoming resource is of correct type and it hasn't arrived before accept it, otherwise discard it.
         GameObject emptyResource = _resourcesToAssemble.Find(el => el.name == resource.name);
         if (emptyResource != null)
         {
+            // Move the input resource inside the output resource
             Destroy(resource.GetComponent<Collider>());
             Destroy(resource.GetComponent<Rigidbody>());
             resource.transform.position = emptyResource.transform.position;
             resource.transform.rotation = emptyResource.transform.rotation;
             resource.transform.localScale = emptyResource.transform.localScale;
             resource.transform.parent = emptyResource.transform.parent;
+            // Add the parameters of the input resource to the output resource
             emptyResource.transform.parent.GetComponent<Resource>().Properties.AddRange(resource.GetComponent<Resource>().Properties);
+            // Destroy useless components
             Destroy(resource.GetComponent<Resource>());
             Destroy(emptyResource);
             _resourcesToAssemble.Remove(emptyResource);
@@ -64,7 +67,7 @@ public class Assembler : PipelineComponent
             resource.transform.DOScale(0, 1).OnComplete(() => Destroy(resource));
         }
 
-        // If all the input resources have arrived, starts assembling
+        // If all the input resources have arrived, start assembling
         if (_resourcesToAssemble.Count == 0 && !_isAssembling)
         {
             _isAssembling = true;
@@ -81,9 +84,9 @@ public class Assembler : PipelineComponent
         }
     }
 
-    protected override void FormatDetails()
+    protected override void FormatComponentDetails()
     {
-        base.FormatDetails();
+        base.FormatComponentDetails();
         PipelineComponentProperties.Add("Input resources: ", string.Join(", ", InputResources.Select(x => x.name)));
         PipelineComponentProperties.Add("Output resource: ", OutputResource.name);
         PipelineComponentProperties.Add("Assembling interval: ", AssemblingInterval);

@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Timer : MonoBehaviour
 {
-    public TextMeshProUGUI timerText;
+    public TextMeshProUGUI TimerText;
 
     private float _timeLeft = 0;
     private bool _counting;
@@ -20,7 +20,7 @@ public class Timer : MonoBehaviour
         if (_counting)
         {
             _timeLeft -= Time.deltaTime;
-            timerText.text = (_timeLeft).ToString("0");
+            TimerText.text = (_timeLeft).ToString("0");
             if (_timeLeft < 0)
             {
                 _counting = false;

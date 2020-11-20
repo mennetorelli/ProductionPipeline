@@ -9,6 +9,7 @@ public class SimulationOptions : MonoBehaviour
     public TextMeshProUGUI Text;
     public Slider Slider;
     public Toggle Toggle;
+    // Play/pause sprites
     public List<Sprite> ToggleImages;
 
     private float _timeScale;

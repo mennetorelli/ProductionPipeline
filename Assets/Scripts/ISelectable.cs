@@ -9,7 +9,7 @@ using UnityEngine;
 public interface ISelectable
 {
     /// <summary>
-    ///  Method that handles mouse selection.
+    /// Handles mouse selection.
     /// </summary>
     void Selected();
 }

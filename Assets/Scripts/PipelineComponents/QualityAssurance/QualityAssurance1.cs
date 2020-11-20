@@ -12,6 +12,7 @@ public class QualityAssurance1 : QualityAssuranceBase
     {
         if (resource.GetComponent<Resource>().Properties.Select(x => x.Value).Aggregate(0, (acc, x) => acc + int.Parse(x.Value)) > Treshold)
         {
+            // The resource satisfies the condition, go to Next[0]
             FeedbackOk.SetActive(true);
             StartCoroutine(Timer(2f, () => FeedbackOk.SetActive(false)));
             Vector3 temp = Next[0].GetComponent<PipelineComponent>().StartPosition;
@@ -20,6 +21,7 @@ public class QualityAssurance1 : QualityAssuranceBase
         }
         else
         {
+            // The resource does not satisfy the condition, go to Next[1]
             FeedbackKo.SetActive(true);
             StartCoroutine(Timer(2f, () => FeedbackKo.SetActive(false)));
             Vector3 temp = Next[1].GetComponent<PipelineComponent>().StartPosition;
@@ -28,11 +30,11 @@ public class QualityAssurance1 : QualityAssuranceBase
         }
     }
 
-    protected override void FormatDetails()
+    protected override void FormatComponentDetails()
     {
-        base.FormatDetails();
+        base.FormatComponentDetails();
         PipelineComponentProperties.Add("Condition: ", "sum of values of resource > " + Treshold);
-        PipelineComponentProperties.Add("Resource accepted goes to: ", Next[0].name);
-        PipelineComponentProperties.Add("Resource discarded goes to: ", Next[1].name);
+        PipelineComponentProperties.Add("Accepted resources accepted go to: ", Next[0].name);
+        PipelineComponentProperties.Add("Discarded resources go to: ", Next[1].name);
     }
 }

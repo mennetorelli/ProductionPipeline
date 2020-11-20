@@ -12,7 +12,7 @@ public abstract class PipelineComponent : MonoBehaviour, ISelectable
     public List<GameObject> Next;
 
     [Header("General optional parameters")]
-    [Tooltip("The transform where the resource is moved when entering the component of the pipeline. If left unspecified, it will be the transform of the component itself")]
+    [Tooltip("The transform where the resource is moved when entering the component of the pipeline. If left unspecified, it will be the transform relative to the component")]
     public Transform StartTrasform;
 
     [HideInInspector]
@@ -22,14 +22,17 @@ public abstract class PipelineComponent : MonoBehaviour, ISelectable
 
     protected virtual void Awake()
     {
+        // Ititialize StartTrasform if has not been specified by the user
         if (StartTrasform == null)
         {
             StartTrasform = transform;
         }
+
+        // The position where the resource is moved is on of the upper face of the specified object (it must have a collider)
         Collider collider = StartTrasform.GetComponent<Collider>();
         StartPosition = new Vector3(collider.bounds.center.x, collider.bounds.center.y + collider.bounds.extents.y, collider.bounds.center.z);
 
-        FormatDetails();
+        FormatComponentDetails();
     }
 
     /// <summary>
@@ -70,9 +73,9 @@ public abstract class PipelineComponent : MonoBehaviour, ISelectable
     }
 
     /// <summary>
-    /// Format the details of the pipeline component
+    /// Format the details of the pipeline component to be shown on the UI
     /// </summary>
-    protected virtual void FormatDetails()
+    protected virtual void FormatComponentDetails()
     {
         PipelineComponentProperties = new Dictionary<string, object>()
         {

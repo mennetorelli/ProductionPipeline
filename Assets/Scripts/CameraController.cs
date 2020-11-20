@@ -31,14 +31,11 @@ public class CameraController : MonoBehaviour
         _moveTarget = transform.position;
     }
 
-    private void FixedUpdate()
+    void Update()
     {
         //Sets the move target position based on the move direction. Must be done here as there's no logic for the input system to calculate holding down an input
-        _moveTarget += (transform.forward * _moveDirection.z + transform.right * _moveDirection.x) * Time.fixedDeltaTime / _timeScale * MoveSpeed;
-    }
+        _moveTarget += (transform.forward * _moveDirection.z + transform.right * _moveDirection.x) * Time.deltaTime / _timeScale * MoveSpeed;
 
-    private void LateUpdate()
-    {
         //Lerp the camera rig to a new move target position
         transform.position = Vector3.Lerp(transform.position, _moveTarget, Time.deltaTime / _timeScale * InternalMoveSpeed);
 

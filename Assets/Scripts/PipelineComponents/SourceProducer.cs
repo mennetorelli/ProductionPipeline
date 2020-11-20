@@ -59,7 +59,7 @@ public class SourceProducer : PipelineComponent
         string id = new string(Enumerable.Repeat("ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789", IDLength)
           .Select(s => s[rnd.Next(s.Length)]).ToArray());
 
-        // Assignment of random value
+        // Assignment of random value, which can be a char or an integer
         KeyValuePair<Type, string> value = new KeyValuePair<Type, string>();
         if (CharValuesSet.Count == 0)
         {
@@ -81,9 +81,9 @@ public class SourceProducer : PipelineComponent
         return instantiatedResource;
     }
 
-    protected override void FormatDetails()
+    protected override void FormatComponentDetails()
     {
-        base.FormatDetails();
+        base.FormatComponentDetails();
         PipelineComponentProperties.Add("Produced resource: ", Resource.name);
         PipelineComponentProperties.Add("Production interval: ", ProductionInterval);
     }

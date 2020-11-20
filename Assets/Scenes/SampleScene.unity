@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 2138677392}
-  m_IndirectSpecularColor: {r: 0.28502697, g: 0.37139347, b: 0.49601266, a: 1}
+  m_IndirectSpecularColor: {r: 0.28502744, g: 0.37139478, b: 0.49601468, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1303,7 +1303,7 @@ MonoBehaviour:
   m_FillRect: {fileID: 110442222}
   m_HandleRect: {fileID: 133765707}
   m_Direction: 0
-  m_MinValue: 0
+  m_MinValue: 0.01
   m_MaxValue: 5
   m_WholeNumbers: 0
   m_Value: 1
@@ -1803,9 +1803,6 @@ MonoBehaviour:
   ConveyorBlocks:
   - {fileID: 1773221286}
   - {fileID: 254876333}
-  - {fileID: 894703282}
-  - {fileID: 1218634934}
-  - {fileID: 1970118835}
   - {fileID: 906729211}
   - {fileID: 1449138811}
 --- !u!4 &642941796
@@ -1862,16 +1859,10 @@ MonoBehaviour:
   - {fileID: 8341510230869160561}
   StartTrasform: {fileID: 1999495555}
   StartPosition: {x: 0, y: 0, z: 0}
-  Speed: 4
+  Speed: 2
   ConveyorBlocks:
   - {fileID: 1999495555}
-  - {fileID: 574153395}
-  - {fileID: 728284565}
-  - {fileID: 2074561371}
-  - {fileID: 1592092309}
-  - {fileID: 444777946}
   - {fileID: 564898443}
-  - {fileID: 1535254776}
   - {fileID: 595800726}
   - {fileID: 402668523}
 --- !u!4 &649712858
@@ -3140,13 +3131,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1116027528}
-  m_LocalRotation: {x: -0.07402666, y: 0.9174182, z: -0.33391285, w: -0.2033866}
-  m_LocalPosition: {x: 3, y: 3.5, z: 4.5}
+  m_LocalRotation: {x: 0.33391288, y: -0.20338663, z: 0.07402667, w: 0.91741824}
+  m_LocalPosition: {x: 2.25, y: 4, z: -4.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 40, y: 205, z: 0}
+  m_LocalEulerAnglesHint: {x: 40, y: -25, z: 0}
 --- !u!114 &1116027533
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4897,7 +4888,10 @@ MonoBehaviour:
   StartTrasform: {fileID: 0}
   StartPosition: {x: 0, y: 0, z: 0}
   Speed: 1
-  ConveyorBlocks: []
+  ConveyorBlocks:
+  - {fileID: 1800669975}
+  - {fileID: 509881506}
+  - {fileID: 1622142384}
 --- !u!1001 &1856596658
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5412,7 +5406,6 @@ MonoBehaviour:
   Speed: 3
   ConveyorBlocks:
   - {fileID: 497918199}
-  - {fileID: 1518213936}
   - {fileID: 1913426902}
   - {fileID: 915818428}
 --- !u!4 &1973565353
@@ -5794,7 +5787,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 0, y: 3.0027e-41, z: 0, w: -2.140625}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -5805,13 +5798,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2138677391}
-  m_LocalRotation: {x: 0.7064338, y: 0.47771442, z: 0.030843567, w: 0.5213338}
-  m_LocalPosition: {x: 0.24, y: 3, z: 4.18}
+  m_LocalRotation: {x: 0.27059805, y: 0.6532815, z: -0.6532815, w: -0.27059805}
+  m_LocalPosition: {x: 1, y: 3, z: 4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 45, y: 130, z: 90}
+  m_LocalEulerAnglesHint: {x: 45, y: 270, z: 90}
 --- !u!1001 &71635036275428680
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6001,7 +5994,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1635317162446706981, guid: 43ee0c8bec3a0de499f974c227a328b4, type: 3}
       propertyPath: BufferInterval
-      value: 15
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1635317162446706981, guid: 43ee0c8bec3a0de499f974c227a328b4, type: 3}
       propertyPath: Next.Array.data[0]
@@ -6082,15 +6075,11 @@ MonoBehaviour:
   - {fileID: 3499244944714760029}
   StartTrasform: {fileID: 1484516990}
   StartPosition: {x: 0, y: 0, z: 0}
-  Speed: 1
+  Speed: 2
   ConveyorBlocks:
   - {fileID: 1484516990}
-  - {fileID: 53781351}
   - {fileID: 2119347743}
-  - {fileID: 1360088611}
   - {fileID: 488797910}
-  - {fileID: 1790720702}
-  - {fileID: 1509310169}
   - {fileID: 606652909}
   - {fileID: 703063457}
 --- !u!114 &1386984056002610913
@@ -6198,6 +6187,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 401931892}
     m_Modifications:
     - target: {fileID: 2518970608607868277, guid: 7669bcc88cc932f4997a55f3fd4fc25b, type: 3}
+      propertyPath: Weighs.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2518970608607868277, guid: 7669bcc88cc932f4997a55f3fd4fc25b, type: 3}
       propertyPath: Next.Array.data[0]
       value: 
       objectReference: {fileID: 5638807580876257981}
@@ -6205,6 +6198,14 @@ PrefabInstance:
       propertyPath: Next.Array.data[1]
       value: 
       objectReference: {fileID: 4105631352398292527}
+    - target: {fileID: 2518970608607868277, guid: 7669bcc88cc932f4997a55f3fd4fc25b, type: 3}
+      propertyPath: Weighs.Array.data[0]
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2518970608607868277, guid: 7669bcc88cc932f4997a55f3fd4fc25b, type: 3}
+      propertyPath: Weighs.Array.data[1]
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 6247987789303610033, guid: 7669bcc88cc932f4997a55f3fd4fc25b, type: 3}
       propertyPath: m_RootOrder
       value: 6
@@ -6754,7 +6755,7 @@ PrefabInstance:
       objectReference: {fileID: 165527601}
     - target: {fileID: 7174071156178570285, guid: 21f70239110ba324fa0a977b79ac1fe9, type: 3}
       propertyPath: ProductionInterval
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 21f70239110ba324fa0a977b79ac1fe9, type: 3}

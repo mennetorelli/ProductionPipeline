@@ -1,6 +1,7 @@
 ﻿using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class FlowSplitter : PipelineComponent
@@ -11,6 +12,12 @@ public class FlowSplitter : PipelineComponent
 
     protected override void Awake()
     {
+        // Check if the specified probabilistic distribution is correct
+        if (Weighs.Count != Next.Count || Weighs.Aggregate(0f, (acc, x) => acc + x) != 1)
+        {
+            Debug.LogError(gameObject.name + ": Provided invalid probabilistic distribution.");
+        }
+
         base.Awake();
     }
 
@@ -43,9 +50,9 @@ public class FlowSplitter : PipelineComponent
         }
     }
 
-    protected override void FormatDetails()
+    protected override void FormatComponentDetails()
     {
-        base.FormatDetails();
+        base.FormatComponentDetails();
         PipelineComponentProperties.Add("Weighs: ", string.Join(", ", Weighs));
     }
 }

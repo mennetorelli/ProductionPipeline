@@ -15,6 +15,7 @@ public class Conveyor : PipelineComponent
 
     protected override void Awake()
     {
+        // If the starting block has not been specified, take the first child
         if (StartTrasform == null)
         {
             StartTrasform = transform.GetChild(0);
@@ -22,6 +23,7 @@ public class Conveyor : PipelineComponent
 
         base.Awake();
 
+        // If a sequence of blocks of has not been specified, take all the blocks in the conveyor
         if (ConveyorBlocks.Count == 0)
         {
             for (int i = 0; i < transform.childCount; i ++)
@@ -33,20 +35,21 @@ public class Conveyor : PipelineComponent
 
     public override void Use(GameObject resource)
     {
-        // Traverse all the conveyor blocks
+        // Traverse all the conveyor blocks specified in ConveyorBlocks list
         Sequence sequence = DOTween.Sequence();
         for (int i = 1; i < ConveyorBlocks.Count; i ++)
         {
             Collider collider = ConveyorBlocks[i].GetComponent<Collider>();
             Vector3 position = new Vector3(collider.bounds.center.x, collider.bounds.center.y + collider.bounds.extents.y + resource.GetComponent<Collider>().bounds.extents.y, collider.bounds.center.z);
-            sequence.Append(resource.transform.DOMove(position, 1/Speed));
+            float duration = Vector3.Distance(ConveyorBlocks[i - 1].transform.position, ConveyorBlocks[i].transform.position) / Speed;
+            sequence.Append(resource.transform.DOMove(position, duration).SetEase(Ease.Linear));
         }
         sequence.OnComplete(() => GoToNext(resource));
     }
 
-    protected override void FormatDetails()
+    protected override void FormatComponentDetails()
     {
-        base.FormatDetails();
+        base.FormatComponentDetails();
         PipelineComponentProperties.Add("Conveyor speed: ", Speed);
         PipelineComponentProperties.Add("Number of blocks: ", ConveyorBlocks.Count);
     }
