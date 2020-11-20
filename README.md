@@ -69,7 +69,7 @@ se questa non viene specificata allora viene considerato l'ordine dato da tutti 
 
 Per questo componente deve essere fornito un valore float per ogni elemento definito in `Next`,
 che indica la probabilità che la risorsa venga inviata all'elemento stesso.
-(La lista indica una distrubuzione di probabilità, quindi la somma dei valori deve essere 1).
+(La lista indica una distribuzione di probabilità, quindi la somma dei valori deve essere 1).
 
 ### Assembler
 
