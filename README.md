@@ -7,10 +7,11 @@
 - Click del mouse con tasto sinistro su una risorsa o un componente della pipeline: visualizzazione del pannello con i dettagli.
   Cliccando a vuoto il pannello con i dettagli si disattiva.
 
-# Scelte architetturali
+# Principali scelte implementative
 
 ## Risorse
 
+Col termine risorsa si indica un generico oggetto che attraversa i componenti della pipeline.
 Ogni risorsa ha un componente `Resource`, in cui è definita una lista di oggetti di tipo `ResourceProperties`, composti a loro volta da:
 
 - `Type: string`: tipo della risorsa (Base, Body, Detail). Viene inizializzato dal nome del GameObject.
@@ -19,7 +20,7 @@ Ogni risorsa ha un componente `Resource`, in cui è definita una lista di oggett
   Dato che questo valore può essere un `int` (come per Base e Detail) o un `char` (come per Body),
   si è optato per codificarlo in modo semplice (con una stringa), tenendo traccia del tipo in modo tale da poterlo decodificare se necessario
   (come nel caso del controllo che esegue il Quality Assurance).
-  Questa scelta garantisce flessibilità, perchè altri componenti potrebbero eseguire operazioni diverse, a seconda del tipo di dato specificato.
+  Questa scelta garantisce flessibilità, perchè nuovi componenti potrebbero eseguire operazioni diverse, a seconda del tipo di dato specificato.
 - `Color: Color`: colore della risorsa, i cui valori R,G,B sono generati casualmente.
 
 Quando una risorsa è composta da più risorse (come Base+Base), la lista di `ResourceProperties` contiene i dettagli di tutte le risorse da cui è composta,
@@ -60,7 +61,7 @@ La lista `Next` è vuota.
 
 ### Conveyor
 
-Questo componente è costituito da una serie di "blocchi" (transform) che la risorsa attraversa,
+Questo componente è costituito da una serie di "blocchi" (transform) che la risorsa percorre,
 prima di passare al componente successivo della pipeline col metodo `GoToNext`.
 Dall'inspector è possibile specificare l'ordine dei blocchi tramite una lista di transform,
 se questa non viene specificata allora viene considerato l'ordine dato da tutti i figli dell'elemento con il componente `Conveyor`.
@@ -73,24 +74,25 @@ che indica la probabilità che la risorsa venga inviata all'elemento stesso.
 
 ### Assembler
 
-Devono essere configurati dall'inspector la lista di prefab delle risorse in ingresso, e il prefab della risorsa da assemblare.
-L'utilizzo di una lista per le risorse in ingresso permette che la risorsa da assemblare sia composta da un numero arbitrario di risorse.
-Si può personalizzare tramite l'inspector il tempo necessario per assemblare la risorsa di output,
-che scatta una volta che tutte le sottorisorse sono arrivate.
+Devono essere configurati dall'inspector la lista di prefab delle risorse in ingresso, e il prefab della risorsa di output.
+L'utilizzo di una lista per le risorse in ingresso permette che la risorsa da assemblare sia composta da un numero arbitrario di elementi.
+Tramite l'inspector si può personalizzare il tempo necessario per assemblare la risorsa di output,
+una volte volta che tutte le risorse di input sono arrivate.
 
-Il prefab della risorsa da assemblare è composto dalle sottorisorse "vuote", nel senso che non hanno un componente `Resource`
-e i colori dei materiali non sono inizializzati.
+Il prefab della risorsa di output è composto dalle risorse di input "vuote", cioè che non hanno un componente `Resource`
+e hanno un materiale semitrasparente.
 
-Per ogni risorsa che viene passata al metodo `Use`, l'Assembler controlla se non è già arrivata.
-Nel caso, integra le sue caratteristiche nella risorsa da assemblare, altrimenti viene scartata.
+Per ogni risorsa che viene passata al metodo `Use`, l'Assembler controlla che non sia già arrivata.
+In caso affermativo, l'Assembler integra le sue caratteristiche nella risorsa di output, altrimenti la risorsa viene scartata.
 
-Una volta che la risorsa di output è stata assemblata, viene considerata come risorsa unica, con un solo componente `Resource`
-che contiene nella lista `ResourceProperties` tutte le proprietà delle risorse di cui è composta.
+Una volta che la risorsa di output è stata assemblata, viene considerata come un oggetto unico, dove il componente `Resource`
+contiene nella lista `ResourceProperties` tutte le proprietà delle risorse di cui è composta.
 
 ### Buffer
 
-Il metodo `Use` aggiunge la risorsa in arrivo ad una lista. Se questa lista non è vuota, allora il buffer fa partire un timer e, allo scadere di questo,
-l'ultima risorsa inserita nella lista viene rilasciata al prossimo componente della pipeline. Si può personalizzare l'intervallo di tempo tramite inspector.
+Il metodo `Use` aggiunge la risorsa in arrivo ad una lista. Se questa lista non è vuota, allora il buffer avvia un timer e, allo scadere di questo,
+l'ultima risorsa inserita nella lista viene rilasciata al prossimo componente della pipeline.
+Si può personalizzare l'intervallo di tempo tramite l'inspector.
 
 ### Quality Assurance
 
