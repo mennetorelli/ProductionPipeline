@@ -12,7 +12,7 @@ public abstract class PipelineComponent : MonoBehaviour, ISelectable
     public List<GameObject> Next;
 
     [Header("General optional parameters")]
-    [Tooltip("The transform where the resource is moved when entering the component of the pipeline. If left unspecified, it will be the transform relative to the component")]
+    [Tooltip("The transform where the resource is moved when entering the component of the pipeline. If left unspecified, it will be the transform of the component itself.")]
     public Transform StartTrasform;
 
     [HideInInspector]
